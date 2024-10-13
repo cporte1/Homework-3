@@ -9,7 +9,12 @@ class Card {
   Card(this.front, this.back);
 }
 
+class CardMatchingGame extends StatelessWidget {
+  @override
+  Widget build(buildContext context) {
 
+  }
+}
 
 void main() {
   runApp(MyApp());
