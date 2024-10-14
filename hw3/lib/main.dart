@@ -37,6 +37,34 @@ void cardFlip(int card) {
 class CardMatchingGame extends StatelessWidget {
   @override
   Widget build(buildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => GameProvider(),
+      child: Consumer<GameProvider>(
+        builder: (context, provider, child) {
+          return GridVied.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crosAxisCount:4,
+            ),
+            itemCount: provier.cards.length,
+            itemBuilder: (context, index) {
+              return AnimatedContainer(
+                duration: Duration(milliseconds: 300),
+                child: Card(
+                  backSide: Image.asset("assets/card_back.png"),
+                  frontSide: Image.asset(provider.cards[index].frontSide),
+                ),
+                transform: Matrix.rotationY(
+                  provider.cards[index].checkFaceUp ? math.pi : 0),
+                );
+              ),
+              onTap: (index) {
+            provider.cardFlip(index);
+              },
+            };
+          ),
+        }
+      )
+    )
 
   }
 }
